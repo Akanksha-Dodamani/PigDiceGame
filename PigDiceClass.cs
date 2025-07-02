@@ -17,7 +17,7 @@ namespace PigDiceGame
             Console.WriteLine("Enter your target value:");
             targetValue = int.Parse(Console.ReadLine());
 
-            for (turn = 1; turn <= 3; turn++)
+            while (totalScore < targetValue)
             {
                 Console.WriteLine($"Turn {turn}");
 
@@ -26,7 +26,10 @@ namespace PigDiceGame
 
                 if (operation == "h")
                 {
-                    Console.WriteLine($"Turn Score: {turnScore}");
+                    Console.WriteLine($"---Turn Score: {turnScore}");
+                    totalScore += turnScore;
+                    turnScore = 0;
+                    turn++;
                     continue;                                       // here "continue" to increment the turn
                 }
                 while (operation == "r")
@@ -50,11 +53,13 @@ namespace PigDiceGame
                     }
                 }
                 Console.WriteLine($"Your Turn {turn} ended!!");
-                Console.WriteLine($"Turn Score: {turnScore}");
+                Console.WriteLine($"---Turn Score: {turnScore}");
                 totalScore += turnScore;
                 turnScore = 0;
+                turn++;
             }
             Console.WriteLine($"Total Score: {totalScore}");
+            Console.WriteLine($"Turns: {turn - 1}");
             if (totalScore == targetValue)
             {
                 Console.WriteLine("Congrats!! You won the game!");
